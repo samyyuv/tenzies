@@ -56,8 +56,8 @@ main {
 }
 
 .dice {
-  width: 92px;
-  height: 35px;
+  width: 150px;
+  height: 50px;
   background-color: #5035FF;
   color: #FFFFFF;
   font-size: 16px;
@@ -65,4 +65,59 @@ main {
 
 .numbersContainer {
   padding: 30px;
+}
+
+.center {
+  left: 50%;
+}
+
+.center-right,
+.center-left,
+.center {
+  top: 50%;
+}
+
+.top-right,
+.center-right,
+.bottom-right {
+  left: calc(50% + 8px);
+}
+
+.top-left,
+.center-left,
+.bottom-left {
+  left: calc(50% - 8px);
+}
+
+.top-left,
+.top-right {
+  top: calc(50% - 9px);
+}
+
+.bottom-right,
+.bottom-left {
+  top: calc(50% + 9px);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.center,
+.center-right,
+.center-left,
+.top-left,
+.top-right {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.top-left,
+.top-right,
+.bottom-right,
+.bottom-left,
+.center,
+.center-right,
+.center-left {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: calc(6px / 2);
+  background-color: #2B283A;
 }

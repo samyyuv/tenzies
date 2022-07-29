@@ -8,6 +8,7 @@ import Numbers from './components/Numbers';
 function App() {
   const [nums, setNum] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const [rolls, setRolls] = React.useState(0);
 
   React.useEffect(() => {
     const allHeld = nums.every(num => num.isHeld);
@@ -42,6 +43,7 @@ function App() {
             num : genereteNewDice()
         })
       )
+      setRolls(prevRoll => prevRoll + 1)
     } else {
       setTenzies(false)
       setNum(allNewDice())
@@ -70,6 +72,7 @@ function App() {
         {tenzies && <Confetti />}
         <h1 className="titre">Tenzies</h1>
         <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+
         <div className="numbersContainer">
           {numbersToShow}
         </div>
