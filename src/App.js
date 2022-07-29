@@ -72,7 +72,9 @@ function App() {
         {tenzies && <Confetti />}
         <h1 className="titre">Tenzies</h1>
         <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-
+        {tenzies && <div className="rollsCounter">
+          <button className="dice"> Total of rolls done = {rolls} </button>
+        </div>}
         <div className="numbersContainer">
           {numbersToShow}
         </div>

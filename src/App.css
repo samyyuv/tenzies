@@ -29,6 +29,14 @@ main {
   padding: 0 10%;
 }
 
+.rollsCounter>button {
+  width: 100%;
+}
+
+.rollsCounter {
+  padding-top: 30px
+}
+
 .numbersContainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
