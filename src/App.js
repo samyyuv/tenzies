@@ -1,7 +1,6 @@
 import React from "react";
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
-
 import './App.css';
 import Numbers from './components/Numbers';
 
@@ -9,11 +8,13 @@ function App() {
   const [nums, setNum] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
+  const [time, setTime] = React.useState(new Date());
 
   React.useEffect(() => {
     const allHeld = nums.every(num => num.isHeld);
     const value = nums[0].value;
     const allValues = nums.every(num => value === num.value);
+
     if (allHeld && allValues) {
       setTenzies(true)
     }
@@ -47,6 +48,8 @@ function App() {
     } else {
       setTenzies(false)
       setNum(allNewDice())
+      setRolls(0)
+      setTime(new Date())
     }
   }
 
@@ -58,6 +61,8 @@ function App() {
       })
     )
   }
+
+  const totalTime = Math.ceil((new Date() - time) / 1000);
 
   const numbersToShow = nums.map(num =>
     <Numbers
@@ -73,7 +78,8 @@ function App() {
         <h1 className="titre">Tenzies</h1>
         <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         {tenzies && <div className="rollsCounter">
-          <button className="dice"> Total of rolls done = {rolls} </button>
+          <button className="rolls"> {rolls} rolls done  </button>
+          <button className="time"> Total time {totalTime} seconds </button>
         </div>}
         <div className="numbersContainer">
           {numbersToShow}
