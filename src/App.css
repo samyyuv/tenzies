@@ -14,7 +14,17 @@ main {
   padding: 40px;
 }
 
+.bests {
+  bottom: 15px;
+  width: 5rem;
+  border: 2px solid #5035FF;
+  color: #5035FF;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
 .tenziesContainer {
+  position: relative;
   border-radius: 25px;
   background-color: #F5F5F5;
   width: 100%;
@@ -54,6 +64,11 @@ main {
 
 .btn-num:hover {
   background-color: #59E391;
+}
+
+.diceContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .dice,

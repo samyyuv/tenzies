@@ -9,6 +9,8 @@ function App() {
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
   const [time, setTime] = React.useState(new Date());
+  const [bestTime, setBestTime] = React.useState(localStorage.getItem("bestTime") || []);
+  const [bestRolls, setBestRolls] = React.useState(localStorage.getItem("bestRolls") || []);
 
   React.useEffect(() => {
     const allHeld = nums.every(num => num.isHeld);
@@ -16,6 +18,18 @@ function App() {
     const allValues = nums.every(num => value === num.value);
 
     if (allHeld && allValues) {
+      setRolls(rolls);
+      if (bestRolls.length < 1 || rolls < bestRolls) {
+        setBestRolls(rolls)
+        localStorage.setItem('bestRolls', JSON.stringify(rolls))
+      }
+
+      const currentTime = Math.ceil((new Date() - time) / 1000)
+      setTime(currentTime);
+      if (bestTime.length < 1 || currentTime < bestTime) {
+        setBestTime(currentTime)
+        localStorage.setItem('bestTime', JSON.stringify(currentTime))
+      }
       setTenzies(true)
     }
   }, [nums])
@@ -62,8 +76,6 @@ function App() {
     )
   }
 
-  const totalTime = Math.ceil((new Date() - time) / 1000);
-
   const numbersToShow = nums.map(num =>
     <Numbers
       value={num.value}
@@ -73,19 +85,21 @@ function App() {
 
   return (
     <main>
+      {tenzies && <Confetti />}
       <div className="tenziesContainer">
-        {tenzies && <Confetti />}
         <h1 className="titre">Tenzies</h1>
         <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         {tenzies && <div className="rollsCounter">
           <button className="rolls"> {rolls} rolls done  </button>
-          <button className="time"> Total time {totalTime} seconds </button>
+          <button className="time"> Total time {time} seconds </button>
         </div>}
         <div className="numbersContainer">
           {numbersToShow}
         </div>
         <div className="diceContainer">
+          <button className="bests">Best rolls: {bestRolls} play</button>
           <button className="dice" onClick={rollDice} >{tenzies ? "New Game" : "Roll"}</button>
+          <button className="bests">Best time: {bestTime} seconds </button>
         </div>
       </div>
     </main>
